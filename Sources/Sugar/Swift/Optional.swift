@@ -9,4 +9,13 @@ public extension Optional {
             throw error
         }
     }
+
+    func or(else value: Wrapped) -> Wrapped {
+        switch self {
+        case let .some(wrapped):
+            wrapped
+        case .none:
+            value
+        }
+    }
 }
