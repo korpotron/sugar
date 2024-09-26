@@ -1,23 +1,37 @@
 import Foundation
 
-public enum Bakeable<T> {
-    case baked(T)
-    case unknown(Error)
+public enum Knowable<T> {
+    case known(_ value: T)
+    case unknown(_ error: Error)
 }
 
-public extension Bakeable {
+public extension Knowable {
     init(catching: () throws -> T) {
         do {
             let value = try catching()
-            self = .baked(value)
+            self = .known(value)
         } catch {
             self = .unknown(error)
         }
     }
 
+    var value: T? {
+        switch self {
+        case let .known(value): value
+        case .unknown: nil
+        }
+    }
+
+    var error: Error? {
+        switch self {
+        case .known: nil
+        case let .unknown(error): error
+        }
+    }
+
     func get() throws -> T {
         switch self {
-        case let .baked(value):
+        case let .known(value):
             return value
         case let .unknown(error):
             throw error
@@ -25,7 +39,7 @@ public extension Bakeable {
     }
 }
 
-extension Bakeable: Decodable where T: Decodable {
+extension Knowable: Decodable where T: Decodable {
     public init(from decoder: any Decoder) throws {
         self.init {
             try T.init(from: decoder)
@@ -33,7 +47,7 @@ extension Bakeable: Decodable where T: Decodable {
     }
 }
 
-extension Bakeable: Encodable where T: Encodable {
+extension Knowable: Encodable where T: Encodable {
     public func encode(to encoder: any Encoder) throws {
         try get().encode(to: encoder)
     }

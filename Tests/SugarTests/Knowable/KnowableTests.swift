@@ -3,10 +3,10 @@ import Foundation
 import Sugar
 
 @Suite
-struct BakeableTests {
+struct KnowableTests {
     @Test
     func init_catching_value() throws {
-        let sut = Bakeable {
+        let sut = Knowable {
             42
         }
 
@@ -15,13 +15,29 @@ struct BakeableTests {
 
     @Test
     func init_catching_error() {
-        let sut = Bakeable {
+        let sut = Knowable {
             throw SomeError()
         }
 
         #expect(throws: SomeError.self) {
             try sut.get()
         }
+    }
+
+    @Test
+    func value() {
+        let sut = Knowable.known(42)
+
+        #expect(sut.value == 42)
+        #expect(sut.error == nil)
+    }
+
+    @Test
+    func error() {
+        let sut = Knowable<Int>.unknown(SomeError())
+
+        #expect(sut.value == nil)
+        #expect(sut.error is SomeError)
     }
 
     @Test
@@ -56,7 +72,7 @@ struct BakeableTests {
 
     @Test
     func encode_success() throws {
-        let actual = try encode(CodableValue(step: .baked(.first)))
+        let actual = try encode(CodableValue(step: .known(.first)))
         let expected = """
         {
           "step" : "first"
@@ -84,7 +100,7 @@ private struct CodableValue: Codable {
         case second
     }
 
-    let step: Bakeable<Step>
+    let step: Knowable<Step>
 }
 
 private func decode(from json: String) throws -> CodableValue {
