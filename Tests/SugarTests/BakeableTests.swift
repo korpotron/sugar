@@ -88,13 +88,16 @@ private struct CodableValue: Codable {
 }
 
 private func decode(from json: String) throws -> CodableValue {
+    let data = try #require(json.data(using: .utf8))
     let decoder = JSONDecoder()
-    return try decoder.decode(CodableValue.self, from: json.data(using: .utf8) ?? Data())
+    let value = try decoder.decode(CodableValue.self, from: data)
+    return value
 }
 
 private func encode(_ object: CodableValue) throws -> String {
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
     let data = try encoder.encode(object)
-    return String(data: data, encoding: .utf8) ?? ""
+    let string = String(data: data, encoding: .utf8)
+    return try #require(string)
 }
