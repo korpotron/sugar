@@ -1,28 +1,37 @@
 import Sugar
-import XCTest
+import Testing
 
-final class DurationTests: XCTestCase {
-    func test_seconds() {
+@Suite
+struct DurationTests {
+    @Test
+    func seconds() throws {
         let sut: Duration = .seconds(42)
-        XCTAssertEqual(sut.components.seconds, 42)
-        XCTAssertEqual(sut.components.attoseconds, 0)
+
+        #expect(sut.components.seconds == 42)
+        #expect(sut.components.attoseconds == 0)
     }
 
-    func test_minutes() {
+    @Test
+    func minutes() {
         let sut: Duration = .minutes(42)
-        XCTAssertEqual(sut.components.seconds, 2520)
-        XCTAssertEqual(sut.components.attoseconds, 0)
+
+        #expect(sut.components.seconds == 2520)
+        #expect(sut.components.attoseconds == 0)
     }
 
-    func test_hours() {
+    @Test
+    func hours() {
         let sut: Duration = .hours(42)
-        XCTAssertEqual(sut.components.seconds, 151_200)
-        XCTAssertEqual(sut.components.attoseconds, 0)
+
+        #expect(sut.components.seconds == 151_200)
+        #expect(sut.components.attoseconds == 0)
     }
 
-    func test_days() {
+    @Test
+    func days() {
         let sut: Duration = .days(42)
-        XCTAssertEqual(sut.components.seconds, 3_628_800)
-        XCTAssertEqual(sut.components.attoseconds, 0)
+
+        #expect(sut.components.seconds == 3_628_800)
+        #expect(sut.components.attoseconds == 0)
     }
 }

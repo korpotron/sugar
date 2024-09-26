@@ -1,24 +1,35 @@
+import Foundation
 import Sugar
-import XCTest
+import Testing
 
-final class TimeIntervalTests: XCTestCase {
-    func test_seconds() {
+@Suite
+struct TimeIntervalTests {
+    @Test
+    func seconds() throws {
         let sut = Duration.seconds(42)
-        XCTAssertEqual(TimeInterval(sut), 42)
+
+        #expect(TimeInterval(sut) == 42)
     }
 
-    func test_days() {
+    @Test
+    func days() throws {
         let sut = Duration.days(15) + Duration.hours(5)
-        XCTAssertEqual(TimeInterval(sut), (15 * 86400) + (5 * 3600))
+        let expected: Double = (15 * 86400) + (5 * 3600)
+
+        #expect(TimeInterval(sut) == expected)
     }
 
-    func test_milliseconds() {
+    @Test
+    func milliseconds() throws {
         let sut = Duration.milliseconds(33)
-        XCTAssertEqual(TimeInterval(sut), 0.033)
+
+        #expect(TimeInterval(sut) == 0.033)
     }
 
-    func test_microseconds() {
+    @Test
+    func microseconds() throws {
         let sut = Duration.microseconds(5)
-        XCTAssertEqual(TimeInterval(sut), 0.000005)
+
+        #expect(TimeInterval(sut) == 0.000005)
     }
 }
