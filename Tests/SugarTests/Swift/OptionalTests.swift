@@ -28,7 +28,6 @@ struct OptionalOrTests {
         #expect(sut.or(else: 10) == 10)
     }
 
-
     @Test
     func or_else_nope() {
         let sut: Optional<Int> = 42

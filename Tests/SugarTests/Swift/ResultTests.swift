@@ -20,7 +20,7 @@ struct ResultTests {
     func prepare(_ result: Result<Int, Error>) -> String {
         result.fold { value in
             "value \(value)"
-        } failure: { error in
+        } failure: { _ in
             "some error"
         }
     }
