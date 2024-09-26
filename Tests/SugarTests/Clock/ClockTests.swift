@@ -7,6 +7,7 @@ struct ClockTests {
     @Test
     func of() throws {
         let sut = Clock.of { .parse("2001-02-03T04:05:06Z") }
+
         #expect(sut.now.timeIntervalSince1970 == 981_173_106)
     }
 

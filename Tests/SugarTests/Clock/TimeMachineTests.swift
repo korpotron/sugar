@@ -7,19 +7,23 @@ struct TimeMachineTests {
     @Test
     func initial() throws {
         let (sut, _) = Clock.travel(.at_2001_02_03__04_05_06)
+
         #expect(sut.now == .at_2001_02_03__04_05_06)
     }
 
     @Test
     func jump() {
         let (sut, machine) = Clock.travel(.at_2001_02_03__04_05_06)
+
         machine.jump(to: .at_2006_05_04__03_02_01)
+
         #expect(sut.now == .at_2006_05_04__03_02_01)
     }
 
     @Test
     func advanced() {
         let (sut, machine) = Clock.travel(.at_2001_02_03__04_05_06)
+
         machine.advanced(hours: 2, minutes: 4, seconds: 6)
 
         #expect(sut.now == .at_2001_02_03__06_09_12)

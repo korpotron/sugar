@@ -1,9 +1,8 @@
-import Testing
 import Sugar
+import Testing
 
 @Suite
 struct OptionalOrTests {
-
     @Test
     func or_throws() {
         let sut: Optional<Int> = nil

@@ -15,7 +15,7 @@ public extension Clock {
 
     static var system: Self {
         .of {
-           Date.now
-       }
+            Date.now
+        }
     }
 }

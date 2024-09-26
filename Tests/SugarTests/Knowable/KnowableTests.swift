@@ -1,6 +1,6 @@
-import Testing
 import Foundation
 import Sugar
+import Testing
 
 @Suite
 struct KnowableTests {

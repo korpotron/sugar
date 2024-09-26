@@ -42,7 +42,7 @@ public extension Knowable {
 extension Knowable: Decodable where T: Decodable {
     public init(from decoder: any Decoder) throws {
         self.init {
-            try T.init(from: decoder)
+            try T(from: decoder)
         }
     }
 }
