@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "292AE61A-941C-47F0-8851-D9CEA50B2225",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SugarTests",
+        "name" : "SugarTests"
+      }
+    }
+  ],
+  "version" : 1
+}
