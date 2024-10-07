@@ -5,31 +5,30 @@ import Testing
 @Suite
 struct TimeIntervalTests {
     @Test
-    func seconds() throws {
-        let sut = Duration.seconds(42)
+    func milliseconds() {
+        let sut = TimeInterval.milliseconds(3)
 
-        #expect(TimeInterval(sut) == 42)
+        #expect(sut == 0.003)
     }
 
     @Test
-    func days() throws {
-        let sut = Duration.days(15) + Duration.hours(5)
-        let expected: Double = (15 * 86400) + (5 * 3600)
+    func seconds() {
+        let sut = TimeInterval.seconds(5)
 
-        #expect(TimeInterval(sut) == expected)
+        #expect(sut == 5)
     }
 
     @Test
-    func milliseconds() throws {
-        let sut = Duration.milliseconds(33)
+    func minutes() {
+        let sut = TimeInterval.minutes(7)
 
-        #expect(TimeInterval(sut) == 0.033)
+        #expect(sut == 420)
     }
 
     @Test
-    func microseconds() throws {
-        let sut = Duration.microseconds(5)
+    func hours() {
+        let sut = TimeInterval.hours(3)
 
-        #expect(TimeInterval(sut) == 0.000005)
+        #expect(sut == 10800)
     }
 }
