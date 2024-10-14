@@ -1,6 +1,7 @@
 import Foundation
 
-public final class TimeMachine {
+public final class TimeMachine: ObservableObject {
+    @Published
     private(set) var date: Date
 
     public init(date: Date) {
